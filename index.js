@@ -11,8 +11,22 @@ const MyForm = {
         var isValid = true,
             errorFields = [];
 
-        fio.value.split(' ').length == 3 ? errorFields.pop('fio') :
-            isValid = false & fio.classList.add('error') & errorFields.push('fio');
+        var removeError = (item) => {
+            var checkField = item.dataset.field;
+            item.classList.remove('error') & errorFields.pop(checkField);
+            console.log(checkField + ' is clear');
+        }
+        var setError = (item) => {
+            var checkField = item.dataset.field;
+            item.classList.add('error') & errorFields.push(checkField);
+            isValid = false;
+            console.log(checkField + ' has error');
+        }
+
+        fio
+            .value.replace(/[0-9]/g, '')
+            .split(' ').length == 3
+            ? removeError(fio) : setError(fio);
 
         return { isValid, errorFields };
     },
@@ -31,7 +45,6 @@ const MyForm = {
     },
     submit: () => {
         MyForm.validate();
-
     }
 }
 
@@ -41,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
         email: 'dummy@yandex.com',
         phone: '+79111234567'
     });
-    MyForm.validate();
 });
 
 form.addEventListener('submit', (e) => {

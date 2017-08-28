@@ -20,6 +20,10 @@
     margin: 20px;
 }
 
+[data-field]{
+    border: 1px solid #777999;
+}
+
 .error{
-    border: 1px solid red;
+    border-color: red;
 }
