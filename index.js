@@ -3,7 +3,8 @@ const
     fio = document.querySelector('[data-field="fio"]'),
     email = document.querySelector('[data-field="email"]'),
     phone = document.querySelector('[data-field="phone"]'),
-    button = document.querySelector('#submitButton');
+    button = document.querySelector('#submitButton'),
+    result = document.querySelector('#resultContainer');
 
 const MyForm = {
     validate: () => {
@@ -11,14 +12,25 @@ const MyForm = {
             isValid: true,
             errorFields: []
         }
+        return status;
     },
-    getData: () => { },
+    getData: () => {
+        const MyFormFields = {
+            fio: fio.value,
+            email: email.value,
+            phone: phone.value,
+        }
+        return MyFormFields;
+    },
     setData: (item) => {
         fio.value = item.fio;
         email.value = item.email;
         phone.value = item.phone;
     },
-    submit: () => { }
+    submit: () => {
+        MyForm.getData();
+
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
