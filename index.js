@@ -8,11 +8,13 @@ const
 
 const MyForm = {
     validate: () => {
-        const status = {
-            isValid: true,
-            errorFields: []
-        }
-        return status;
+        var isValid = true,
+            errorFields = [];
+
+        fio.value.split(' ').length == 3 ? errorFields.pop('fio') :
+            isValid = false & fio.classList.add('error') & errorFields.push('fio');
+
+        return { isValid, errorFields };
     },
     getData: () => {
         const MyFormFields = {
@@ -28,7 +30,7 @@ const MyForm = {
         phone.value = item.phone;
     },
     submit: () => {
-        MyForm.getData();
+        MyForm.validate();
 
     }
 }
@@ -39,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         email: 'dummy@yandex.com',
         phone: '+79111234567'
     });
+    MyForm.validate();
 });
 
 form.addEventListener('submit', (e) => {
