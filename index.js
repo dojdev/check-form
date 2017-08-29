@@ -35,6 +35,18 @@ const MyForm = {
             .indexOf(mailDomain) != -1
             ? true : setError(email);
 
+        var phoneClean = phone.value.replace(/\D+/g, '');
+
+        var phoneSumm = 0;
+
+        for (var i = 0; i < phoneClean.length; i++) {
+            phoneSumm += +phoneClean[i];
+
+        }
+
+        phoneSumm <= 30 ? console.log(phoneSumm) : setError(phone);
+
+
         return { isValid, errorFields };
     },
     getData: () => {
@@ -59,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     MyForm.setData({
         fio: 'dummy user data',
         email: 'dummy@yandex.com',
-        phone: '+79111234567'
+        phone: '+7(111)228-33-11'
     });
 });
 
