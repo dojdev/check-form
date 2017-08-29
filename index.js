@@ -13,12 +13,12 @@ const MyForm = {
 
         var removeError = (item) => {
             var checkField = item.dataset.field;
-            item.classList.remove('error') & errorFields.pop(checkField);
+            errorFields.pop(checkField);
             console.log(checkField + ' is clear');
         }
         var setError = (item) => {
             var checkField = item.dataset.field;
-            item.classList.add('error') & errorFields.push(checkField);
+            errorFields.push(checkField);
             isValid = false;
             console.log(checkField + ' has error');
         }
@@ -26,7 +26,14 @@ const MyForm = {
         fio
             .value.replace(/[0-9]/g, '')
             .split(' ').length == 3
-            ? removeError(fio) : setError(fio);
+            ? true : setError(fio);
+
+        var mailDomain = email.value.split('@')[1],
+            mailList = ['ya.ru', 'yandex.ru', 'yandex.ua', 'yandex.by', 'yandex.kz', 'yandex.com'];
+
+        mailList
+            .indexOf(mailDomain) != -1
+            ? true : setError(email);
 
         return { isValid, errorFields };
     },
